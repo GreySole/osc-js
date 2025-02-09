@@ -119,7 +119,12 @@ export default class WebsocketClientPlugin extends Plugin {
       size: 0,
     }
 
-    this.socket = new WebSocket(`${scheme}://${host}:${port}`, protocol)
+    if (port != null) {
+      this.socket = new WebSocket(`${scheme}://${host}:${port}`, protocol)
+    } else {
+      this.socket = new WebSocket(`${scheme}://${host}`, protocol)
+    }
+
     this.socket.binaryType = 'arraybuffer'
     this.socketStatus = STATUS.IS_CONNECTING
 
